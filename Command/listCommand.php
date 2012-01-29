@@ -10,12 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class listCommand extends snippetCommand
 {
-    
-    function __construct()
-    {
-        parent::__construct($name = null);
-    }
-
     protected function configure()
     {
         $this
