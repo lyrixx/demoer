@@ -19,9 +19,10 @@ class ListCommand extends Command
     {
         $snippetsPath = $input->getOption('snippets-path');
         $snippetsPathInfo = new \SplFileInfo($snippetsPath);
+        $snippetsRealPath = $snippetsPathInfo->getRealpath();
 
         foreach ($this->listSnippets($snippetsPath) as $snippet) {
-            $output->writeln(substr($snippet->getRealpath(), strlen($snippetsPathInfo->getRealpath())+1));
+            $output->writeln(substr($snippet->getRealpath(), strlen($snippetsRealPath)+1));
         }
     }
 }

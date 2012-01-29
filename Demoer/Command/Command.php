@@ -5,17 +5,15 @@ namespace Demoer\Command;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Finder\Finder;
 
 abstract class Command extends BaseCommand
 {
     protected $finder;
 
-    public function __construct(Finder $finder, $name = null)
+    public function __construct($name = null)
     {
         parent::__construct($name);
 
-        $this->finder = $finder;
         $this->addOption('snippets-path', null, InputOption::VALUE_OPTIONAL, 'Path to the snippets', __DIR__.'/../../snippets');
     }
 
@@ -28,11 +26,17 @@ abstract class Command extends BaseCommand
 
     protected function listSnippets($path)
     {
-        return $this->finder
+        return $this->getFinder()
             ->name('*.php')
             ->sortByName()
             ->in($path)
             ->files()
         ;
     }
+
+    public function getFinder()
+    {
+        return $this->getApplication()->getFinder();
+    }
+
 }

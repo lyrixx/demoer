@@ -37,13 +37,14 @@ class RunCommand extends Command
         }
 
         $snippetsPathInfo = new \SplFileInfo($snippetsPath);
+        $snippetsRealPath = $snippetsPathInfo->getRealpath();
 
         $dialog = $this->getHelperSet()->get('dialog');
         $i = 0;
         foreach ($snippets as $snippet) {
             $snippetCode = file_get_contents($snippet->getRealpath());
 
-            $snippetPath = substr($snippet->getRealpath(), strlen($snippetsPathInfo->getRealpath())+1);
+            $snippetPath = substr($snippet->getRealpath(), strlen($snippetsRealPath)+1);
             $output->writeln(sprintf('<info>DEMO [%d/%d]:</info> %s', $i+1, $nbSnippets, $snippetPath));
 
             $this->hr($output, 20);
