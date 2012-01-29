@@ -1,7 +1,7 @@
 php - demoer
 ============
 
-This project is able to show and excecute snippets.
+This project is able to show and execute snippets.
 The script will wait user press "enter" to show the result.
 Put your snippet in `snippets/` folder.
 
