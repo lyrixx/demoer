@@ -13,5 +13,5 @@ use Demoer\Command;
 $snippets_path = __DIR__ . '/snippets/';
 $console = new Application();
 $console->add(new Command\listCommand($snippets_path));
-$console->add(new Command\runCommand($snippets_path, $console));
+$console->add(new Command\runCommand($snippets_path));
 $console->run();

@@ -12,12 +12,9 @@ use InvalidArgumentException;
 
 class runCommand extends snippetCommand
 {
-    protected $console;
-
-    function __construct($snippets_path, $console)
+    function __construct($snippets_path)
     {
         parent::__construct($snippets_path);
-        $this->console = $console;
     }
 
     protected function configure()
@@ -45,7 +42,7 @@ class runCommand extends snippetCommand
             $nbSnippets = count($snippets->getIterator()->getIterator());
         }
 
-        $dialog = $this->console->getHelperSet()->get('dialog');
+        $dialog = $this->getHelperSet()->get('dialog');
         $i = 0;
         foreach ($snippets as $snippet) {
             $snippetCode = file_get_contents($snippet->getRealpath());
