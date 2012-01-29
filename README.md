@@ -5,6 +5,8 @@ This project is able to show and excecute snippets.
 The script will wait user press "enter" to show the result.
 Put your snippet in `snippets/` folder.
 
+![Demo](http://img19.imageshack.us/img19/1644/demoer.jpg)
+
 Installation
 ------------
 
