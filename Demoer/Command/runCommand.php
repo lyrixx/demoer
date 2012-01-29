@@ -1,5 +1,5 @@
 <?php
-namespace Command;
+namespace Demoer\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Finder\Finder;
@@ -9,15 +9,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\PhpProcess;
 use InvalidArgumentException;
-use SplFileInfo;
 
 class runCommand extends snippetCommand
 {
     protected $console;
 
-    function __construct($console)
+    function __construct($snippets_path, $console)
     {
-        parent::__construct($name = null);
+        parent::__construct($snippets_path);
         $this->console = $console;
     }
 
@@ -35,11 +34,11 @@ class runCommand extends snippetCommand
         $filename = $input->getArgument('filename');
 
         if (null !== $filename) {
-            $filename = SNIPPETS_DIR.DIRECTORY_SEPARATOR.$filename;
+            $filename = $this->getSnippetsPath().DIRECTORY_SEPARATOR.$filename;
             if (!file_exists($filename)) {
                 throw new InvalidArgumentException(sprintf('file "%s" does not exist', $filename));
             }
-            $snippets = array(new SplFileInfo($filename));
+            $snippets = array(new \SplFileInfo($filename));
             $nbSnippets = 1;
         } else {
             $snippets = $this->listSnippets(new Finder());

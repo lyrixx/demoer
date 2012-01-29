@@ -8,10 +8,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Command;
+use Demoer\Command;
 
-
+$snippets_path = __DIR__ . '/snippets/';
 $console = new Application();
-$console->add(new Command\listCommand());
-$console->add(new Command\runCommand($console));
+$console->add(new Command\listCommand($snippets_path));
+$console->add(new Command\runCommand($snippets_path, $console));
 $console->run();

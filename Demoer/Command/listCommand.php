@@ -1,5 +1,5 @@
 <?php
-namespace Command;
+namespace Demoer\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Finder\Finder;
@@ -10,6 +10,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class listCommand extends snippetCommand
 {
+    public function __construct($snippets_path)
+    {
+        parent::__construct($snippets_path);
+    }
+
     protected function configure()
     {
         $this
