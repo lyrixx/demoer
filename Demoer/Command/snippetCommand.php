@@ -36,7 +36,7 @@ abstract class snippetCommand extends Command
     /** 
      * @return string
      */
-    public function getSnippetsPath()
+    protected function getSnippetsPath()
     {
         return $this->snippets_path;
     }
@@ -45,7 +45,7 @@ abstract class snippetCommand extends Command
      * @param $snippets_path
      * @return void
      */
-    public function setSnippetsPath($snippets_path)
+    protected function setSnippetsPath($snippets_path)
     {
         $this->snippets_path = $snippets_path;
     }
