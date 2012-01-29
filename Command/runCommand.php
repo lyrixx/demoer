@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\PhpProcess;
 use InvalidArgumentException;
+use SplFileInfo;
 
 class runCommand extends snippetCommand
 {
@@ -38,7 +39,7 @@ class runCommand extends snippetCommand
             if (!file_exists($filename)) {
                 throw new InvalidArgumentException(sprintf('file "%s" does not exist', $filename));
             }
-            $snippets = array(new \SplFileInfo($filename));
+            $snippets = array(new SplFileInfo($filename));
             $nbSnippets = 1;
         } else {
             $snippets = $this->listSnippets(new Finder());
