@@ -1,22 +1,14 @@
 <?php
 namespace Demoer\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\PhpProcess;
-use InvalidArgumentException;
 
-class runCommand extends snippetCommand
+class RunCommand extends Command
 {
-    function __construct($snippets_path)
-    {
-        parent::__construct($snippets_path);
-    }
-
     protected function configure()
     {
         $this
@@ -30,24 +22,29 @@ class runCommand extends snippetCommand
     {
         $filename = $input->getArgument('filename');
 
+        $snippetsPath = $input->getOption('snippets-path');
+
         if (null !== $filename) {
-            $filename = $this->getSnippetsPath().DIRECTORY_SEPARATOR.$filename;
+            $filename = $snippetsPath.DIRECTORY_SEPARATOR.$filename;
             if (!file_exists($filename)) {
-                throw new InvalidArgumentException(sprintf('file "%s" does not exist', $filename));
+                throw new \InvalidArgumentException(sprintf('file "%s" does not exist', $filename));
             }
             $snippets = array(new \SplFileInfo($filename));
             $nbSnippets = 1;
         } else {
-            $snippets = $this->listSnippets(new Finder());
+            $snippets = $this->listSnippets($snippetsPath);
             $nbSnippets = count($snippets->getIterator()->getIterator());
         }
+
+        $snippetsPathInfo = new \SplFileInfo($snippetsPath);
 
         $dialog = $this->getHelperSet()->get('dialog');
         $i = 0;
         foreach ($snippets as $snippet) {
             $snippetCode = file_get_contents($snippet->getRealpath());
 
-            $output->writeln(sprintf('<info>DEMO [%d/%d]:</info> %s', $i+1, $nbSnippets, $snippet->getRealPath()));
+            $snippetPath = substr($snippet->getRealpath(), strlen($snippetsPathInfo->getRealpath())+1);
+            $output->writeln(sprintf('<info>DEMO [%d/%d]:</info> %s', $i+1, $nbSnippets, $snippetPath));
 
             $this->hr($output, 20);
 

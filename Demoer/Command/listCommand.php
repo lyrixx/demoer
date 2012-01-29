@@ -1,20 +1,12 @@
 <?php
+
 namespace Demoer\Command;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class listCommand extends snippetCommand
+class ListCommand extends Command
 {
-    public function __construct($snippets_path)
-    {
-        parent::__construct($snippets_path);
-    }
-
     protected function configure()
     {
         $this
@@ -25,10 +17,11 @@ class listCommand extends snippetCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $finder = $this->listSnippets(new Finder());
+        $snippetsPath = $input->getOption('snippets-path');
+        $snippetsPathInfo = new \SplFileInfo($snippetsPath);
 
-        foreach ($finder->files() as $snippet) {
-            $output->writeln($snippet->getFilename());
+        foreach ($this->listSnippets($snippetsPath) as $snippet) {
+            $output->writeln(substr($snippet->getRealpath(), strlen($snippetsPathInfo->getRealpath())+1));
         }
     }
 }
