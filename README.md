@@ -26,3 +26,13 @@ Requirements
 ------------
 
 * php-5.3.2
+
+Tips
+----
+
+You can import phpt from https://github.com/php/php-src/tree/master/Zend/tests
+as samples, and then run
+`sed -i -n '1h;1!H;${;g;s/.*\(<?php.*?>\).*/\1/g;p;}' *` or
+`sed -i -n '1h;1!H;${;g;s/.*--FILE--\(.*\)--EXPECTF--.*/\1/g;p;}' *`
+to keep php part, and then rename files :
+`rename "s/phpt/php/" *`
