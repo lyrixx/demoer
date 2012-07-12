@@ -33,7 +33,7 @@ class RunCommand extends Command
             $nbSnippets = 1;
         } else {
             $snippets = $this->listSnippets($snippetsPath);
-            $nbSnippets = count($snippets->getIterator()->getIterator());
+            $nbSnippets = count($snippets->getIterator());
         }
 
         $snippetsPathInfo = new \SplFileInfo($snippetsPath);
