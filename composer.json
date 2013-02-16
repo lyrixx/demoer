@@ -1,9 +1,20 @@
 {
+    "name"        : "lyrixx/demoer",
+    "description" : "A cli script to run some snippet",
+    "license"     : "MIT",
+    "homepage"    : "https://github.com/lyrixx/demoer",
+    "keywords"    : ["demo", "snippet", "cli"],
+    "authors"     : [
+        {
+            "name"  : "Grégoire Pineau",
+            "email" : "lyrixx@lyrixx.info"
+        }
+    ],
     "require": {
-        "symfony/class-loader": "2.1.*",
-        "symfony/finder": "2.1.*",
-        "symfony/process": "2.1.*",
-        "symfony/console": "2.1.*"
+        "symfony/class-loader" : "~2.1",
+        "symfony/finder"       : "~2.1",
+        "symfony/process"      : "~2.1",
+        "symfony/console"      : "~2.1"
     },
     "autoload": {
         "psr-0": {
